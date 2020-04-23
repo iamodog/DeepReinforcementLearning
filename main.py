@@ -93,15 +93,14 @@ while 1:
     
     memory.clear_stmemory()
     
-    #if len(memory.ltmemory) >= config.MEMORY_SIZE:
-    if iteration % 2 == 0:
+    if len(memory.ltmemory) >= config.MEMORY_SIZE:
 
         ######## RETRAINING ########
         print('RETRAINING...')
         current_player.replay(memory.ltmemory)
         print('')
 
-        if iteration % 2 == 0:
+        if iteration % 5 == 0:
             pickle.dump( memory, open( run_folder + "memory/memory" + str(iteration).zfill(4) + ".p", "wb" ) )
 
         lg.logger_memory.info('====================')
