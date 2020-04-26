@@ -24,6 +24,7 @@ class User():
 
 	def act(self, state, tau):
 		action = input('Enter your chosen action: ')
+		action = int(action)
 		pi = np.zeros(self.action_size)
 		pi[action] = 1
 		value = None

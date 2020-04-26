@@ -86,7 +86,6 @@ def playMatches(player1, player2, EPISODES, logger, turns_until_tau0, memory = N
                 action, pi, MCTS_value, NN_value = players[state.playerTurn]['agent'].act(state, 1)
             else:
                 action, pi, MCTS_value, NN_value = players[state.playerTurn]['agent'].act(state, 0)
-
             if memory != None:
                 ####Commit the move to memory
                 memory.commit_stmemory(env.identities, state, pi)
@@ -94,15 +93,16 @@ def playMatches(player1, player2, EPISODES, logger, turns_until_tau0, memory = N
 
             logger.info('action: %d', action)
             for r in range(env.grid_shape[0]):
-                logger.info(['----' if x == 0 else '{0:.2f}'.format(np.round(x,2)) for x in pi[env.grid_shape[1]*r : (env.grid_shape[1]*r + env.grid_shape[1])]])
-            logger.info('MCTS perceived value for %s: %f', state.pieces[str(state.playerTurn)] ,np.round(MCTS_value,2))
-            logger.info('NN perceived value for %s: %f', state.pieces[str(state.playerTurn)] ,np.round(NN_value,2))
+                logger.info(['----' if x == 0 else '{0:.2f}'.format(np.round(x,2)) for x in pi[env.grid_shape[1]*r : (env.grid_shape[1]*r + env.grid_shape[1])]])            
+            #logger.info('MCTS perceived value for %s: %f', state.pieces[str(state.playerTurn)] ,np.round(MCTS_value,2))
+            #logger.info('NN perceived value for %s: %f', state.pieces[str(state.playerTurn)] ,np.round(NN_value,2))
             logger.info('====================')
 
             ### Do the action
             state, value, done, _ = env.step(action) #the value of the newState from the POV of the new playerTurn i.e. -1 if the previous player played a winning move
             
             env.gameState.render(logger)
+            env.gameState.render_print()#print l'avancée du jeu
 
             if done == 1: 
                 if memory != None:
@@ -117,6 +117,8 @@ def playMatches(player1, player2, EPISODES, logger, turns_until_tau0, memory = N
              
                 if value == 1:
                     logger.info('%s WINS!', players[state.playerTurn]['name'])
+                    print('%s WINS!', players[state.playerTurn]['name'])
+                    
                     scores[players[state.playerTurn]['name']] = scores[players[state.playerTurn]['name']] + 1
                     if state.playerTurn == 1: 
                         sp_scores['sp'] = sp_scores['sp'] + 1
