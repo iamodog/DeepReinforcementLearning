@@ -183,7 +183,7 @@ class Agent():
 
 		return action, value
 
-	def replay(self, ltmemory):
+	def replay(self, ltmemory, iteration):
 		lg.logger_mcts.info('******RETRAINING MODEL******')
 
 
@@ -206,7 +206,8 @@ class Agent():
 		plt.plot(self.train_policy_loss, 'k--')
 
 		plt.legend(['train_overall_loss', 'train_value_loss', 'train_policy_loss'], loc='lower left')
-
+		plt.savefig('Images/Loss/loss'+str(iteration)+'.png')
+        
 		display.clear_output(wait=True)
 		display.display(pl.gcf())
 		pl.gcf().clear()
