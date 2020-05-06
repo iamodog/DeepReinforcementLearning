@@ -34,7 +34,7 @@ env = Game()
 if initialise.INITIAL_RUN_NUMBER != None:
     copyfile(run_archive_folder  + env.name + '/run' + str(initialise.INITIAL_RUN_NUMBER).zfill(4) + '/config.py', './config.py')
 
-import config
+import config_learning_rate_2 as config
 
 ######## LOAD MEMORIES IF NECESSARY ########
 
@@ -64,7 +64,7 @@ else:
 
 #copy the config file to the run folder
 copyfile('./config.py', run_folder + 'config.py')
-plot_model(current_NN.model, to_file=run_folder + 'models/model.png', show_shapes = True)
+#plot_model(current_NN.model, to_file=run_folder + 'models/model.png', show_shapes = True)
 
 print('\n')
 
@@ -97,7 +97,7 @@ while 1:
 
         ######## RETRAINING ########
         print('RETRAINING...')
-        current_player.replay(memory.ltmemory)
+        current_player.replay(memory.ltmemory, iteration)
         print('')
 
         if iteration % 5 == 0:
