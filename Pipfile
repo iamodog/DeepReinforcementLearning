@@ -50,7 +50,7 @@ ipython_genutils = "==0.2.0"
 Keras = "==2.1.5"
 Markdown = "==2.6.11"
 Pygments = "==2.2.0"
-PyYAML = "==3.12"
+PyYAML = "==5.4"
 Werkzeug = "==0.14.1"
 
 [requires]
